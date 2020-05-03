@@ -12,7 +12,7 @@ public class PuzzlePiece {
 
     private PuzzlePiece(String imageName) {
         try {
-            img = ImageIO.read(new File("src/assets/" + imageName));
+            img = ImageIO.read(new File("src/assets/images/" + imageName));
         } catch (IOException e) {
             e.printStackTrace();
         }

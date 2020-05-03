@@ -4,26 +4,28 @@ import interfaces.Request;
 import models.Location;
 import models.PuzzlePiece;
 import utils.Constants;
+import utils.config.AssetConfig;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Iterator;
 
-public class GameLogic {
+public class Board {
     private boolean gameFinished;
     private static String gameState = "#";
     private static ArrayList<PuzzlePiece> puzzlePieces;
-    private static int missingPiece = 0;
+    private static int missingPiece;
     private ArrayList<Integer> piecesRandomOrder;
     private ArrayList<Request> requests;
+    private AssetConfig config;
 
-    public GameLogic() {
+    public Board() {
         init();
     }
 
     private void init() {
-        missingPiece = 7;
-        piecesRandomOrder = new ArrayList<>(Arrays.asList(0, 5, 6, 7, 4, 3, 2, 8, 1));
+        config = new AssetConfig("ASSET_CONFIG_FILE");
+        missingPiece = config.getMissingPiece();
+        piecesRandomOrder = config.getInitArray();
         puzzlePieces = new ArrayList<>();
         requests = new ArrayList<>();
         addPieces();
@@ -44,7 +46,7 @@ public class GameLogic {
 
     private void addPieces() {
         for (int i = 0; i < 9; i++) {
-            if (this.getMissingPiece() != i) {
+            if (missingPiece != i) {
                 puzzlePieces.add(new PuzzlePiece(piecesRandomOrder.get(i) + 1 + ".png", new Location(Constants.height / 3 * (i % 3), Constants.width / 3 * (i / 3))));
             } else {
                 puzzlePieces.add(new PuzzlePiece("missing.jpg", new Location(Constants.height / 3 * (i % 3), Constants.width / 3 * (i / 3))));

@@ -1,6 +1,6 @@
 package GUI;
 
-import gameLogic.GameLogic;
+import gameLogic.Board;
 import models.PuzzlePiece;
 import utils.Constants;
 
@@ -9,7 +9,7 @@ import java.awt.*;
 
 public class MyPanel extends JPanel {
     private static MyPanel panelInstance;
-    private GameLogic logic;
+    private Board logic;
 
 
     private MyPanel() {
@@ -18,7 +18,7 @@ public class MyPanel extends JPanel {
 
     private void init() {
         setSize();
-        logic = new GameLogic();
+        logic = new Board();
     }
 
     private void setSize() {
@@ -57,7 +57,7 @@ public class MyPanel extends JPanel {
         }
     }
 
-    public GameLogic getLogic() {
+    public Board getLogic() {
         return logic;
     }
 }
